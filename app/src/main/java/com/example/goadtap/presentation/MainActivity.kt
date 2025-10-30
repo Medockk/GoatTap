@@ -126,7 +126,6 @@ class MainActivity : ComponentActivity() {
                     .padding(horizontal = 10.dp)
                     .fillMaxWidth()
             ) {
-
                 Text(
                     text = "Цель: Купить Платок" + if ((coinData?.upgrade4Level
                             ?: 0) > 0 && coinData?.isSuccess == true
@@ -171,7 +170,6 @@ class MainActivity : ComponentActivity() {
                 },
                 onTap = {
                     soundPool?.play(tapSound, 10f, 10f, 0, 0, 1f)
-                    viewModel.onTap()
 
                     if (!animationStart) {
                         coinAnimations.add(CoinAnimationData(offset = it))
@@ -190,12 +188,8 @@ class MainActivity : ComponentActivity() {
             UpgradeDialog(
                 onDismiss = { viewModel.showUpgradeDialog.value = false },
                 onPurchase = { upgradeType, cost, upgradeValue ->
-
                     // При покупке улучшения появляется звук покупки
-                    viewModel.purchaseUpgrade(upgradeType, cost, upgradeValue)
                     soundPool?.play(purchaseSound, 0.5f, 0.5f, 0, 0, 1f)
-
-
                 },
                 coins = coinData?.coins ?: 0,
                 upgrade1Level = coinData?.upgrade1Level ?: 0,

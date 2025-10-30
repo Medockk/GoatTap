@@ -35,7 +35,6 @@ class MainViewModel(
 
     init {
         loadCoinData()
-        startPlayer()
     }
 
     private fun loadCoinData() {
