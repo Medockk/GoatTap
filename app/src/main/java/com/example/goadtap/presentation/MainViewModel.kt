@@ -34,6 +34,7 @@ class MainViewModel(
     val playerIsOn = mutableStateOf(true)
 
     init {
+        startPlayer()
         loadCoinData()
     }
 
@@ -85,17 +86,18 @@ class MainViewModel(
                     1 -> currentData.copy(coins = newCoins, tapValue = currentData.tapValue + upgradeValue, upgrade1Level = currentData.upgrade1Level + 1)
                     2 -> currentData.copy(coins = newCoins, tapValue = currentData.tapValue + upgradeValue, upgrade2Level = currentData.upgrade2Level + 1)
                     3 -> currentData.copy(coins = newCoins, tapValue = currentData.tapValue + upgradeValue, upgrade3Level = currentData.upgrade3Level + 1)
-                    4 -> currentData.copy(coins = newCoins, tapValue = currentData.tapValue + upgradeValue, upgrade4Level = currentData.upgrade4Level + 1)
+                    4 -> currentData.copy(coins = newCoins, tapValue = currentData.tapValue + upgradeValue, upgrade4Level = currentData.upgrade4Level + 1, isSuccess = true)
                     else -> currentData // В случае косяка
                 }
                 coinDataDao.updateCoinData(updatedData)
             }
+
         }
     }
 
 
     fun startPlayer(){
-        mediaPlayer.setVolume(0.2f, 0.2f)
+        mediaPlayer.setVolume(0.4f, 0.4f)
         mediaPlayer.isLooping = true
         mediaPlayer.start()
         playerIsOn.value = true

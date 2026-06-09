@@ -169,7 +169,8 @@ class MainActivity : ComponentActivity() {
                     soundPool?.autoPause()
                 },
                 onTap = {
-                    soundPool?.play(tapSound, 10f, 10f, 0, 0, 1f)
+                    viewModel.onTap()
+                    soundPool?.play(tapSound, 100f, 100f, 1, 0, 1f)
 
                     if (!animationStart) {
                         coinAnimations.add(CoinAnimationData(offset = it))
@@ -189,6 +190,7 @@ class MainActivity : ComponentActivity() {
                 onDismiss = { viewModel.showUpgradeDialog.value = false },
                 onPurchase = { upgradeType, cost, upgradeValue ->
                     // При покупке улучшения появляется звук покупки
+                    viewModel.purchaseUpgrade(upgradeType, cost, upgradeValue)
                     soundPool?.play(purchaseSound, 0.5f, 0.5f, 0, 0, 1f)
                 },
                 coins = coinData?.coins ?: 0,
@@ -201,7 +203,7 @@ class MainActivity : ComponentActivity() {
 
         if (coinData?.isSuccess == true) {
             viewModel.showUpgradeDialog.value = false
-            soundPool?.play(eeeSound, 1f, 1f, 0, 0, 1f)
+            soundPool?.play(eeeSound, 1f, 1f, 1, 0, 1f)
         }
 
         var boxSize by remember { mutableStateOf(IntSize.Zero) }
